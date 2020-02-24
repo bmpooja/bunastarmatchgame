@@ -1,0 +1,60 @@
+.game{
+    max-width: 500px;
+    margin:0 auto;
+}
+body{
+    display: flex;
+}
+.star {
+    position: relative;
+    
+    display: inline-block;
+    width: 0;
+    height: 0;
+    
+    margin-left: .9em;
+    margin-right: .9em;
+    margin-bottom: 1.2em;
+    
+    border-right:  .3em solid transparent;
+    border-bottom: .7em  solid gray;
+    border-left:   .3em solid transparent;
+  
+    /* Controlls the size of the stars. */
+    font-size: 30px;
+}
+    .star:before  {
+        content: '';
+        
+        display: block;
+        width: 0;
+        height: 0;
+        
+        position: absolute;
+        top: .6em;
+        left: -1em;
+      
+        border-right:  1em solid transparent;
+        border-bottom: .7em  solid gray;
+        border-left:   1em solid transparent;
+      
+        transform: rotate(-35deg);
+      }
+      
+      .star:after { 
+        content: '';
+        
+        display: block;
+        width: 0;
+        height: 0;
+        
+        position: absolute;
+        top: .6em;
+        left: -1em;
+      
+        border-right:  1em solid transparent;
+        border-bottom: .7em  solid gray;
+        border-left:   1em solid transparent; 
+        transform: rotate(35deg);
+      }
+    
