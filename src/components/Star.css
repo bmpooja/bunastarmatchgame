@@ -1,9 +1,22 @@
 .game{
-    max-width: 500px;
-    margin:0 auto;
+    max-width: 700px;
+    margin:50px auto;
 }
-body{
+.left{
+    max-width: 400px;
+    flex-flow: row ;
+    margin: 70px auto;
+}
+.right{
+    max-width: 350px;
+    flex-flow: row ;
+    margin: 70px auto;
+}
+.body{
     display: flex;
+    align-content: space-between; 
+    justify-content: stretch;
+    border: 1px solid rgb(111,41,97);
 }
 .star {
     position: relative;
@@ -21,7 +34,7 @@ body{
     border-left:   .3em solid transparent;
   
     /* Controlls the size of the stars. */
-    font-size: 30px;
+    font-size: 50px;
 }
     .star:before  {
         content: '';
@@ -57,4 +70,11 @@ body{
         border-left:   1em solid transparent; 
         transform: rotate(35deg);
       }
+    .number{
+        font-size: 50px;
+        height: 20vh;
+        padding: 10px;
+        align-self: stretch;
+        
+    }
     
