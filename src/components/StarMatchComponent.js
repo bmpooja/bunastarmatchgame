@@ -5,6 +5,45 @@ import StarDisplayComponent from './StarDisplayComponent';
 
 const StarMatchComponent =()=>{
     const [stars, setStars] = useState(utils.random(1,8));
+    const [availableNumbers, setAvailableNos] = useState([utils.range(1,8)]);
+    console.log(availableNumbers)
+    const [candidateNumbers, setCandidateNos] = useState([2,3]);
+
+    const candidatesAreWrong = utils.sum(candidateNumbers)>stars;
+
+    const noStatus=(number)=>{
+        if(!availableNumbers.includes(number)){
+            return "used";
+        }
+        else if(candidateNumbers.includes(number)){
+            return candidatesAreWrong ? 'wrong' :'candidate';
+        }
+        return "available"
+
+    }
+ const onNumberClick =(number,currentStatus)=>{
+     console.log('onNumber got call')
+     console.log(currentStatus)
+            if(currentStatus == 'used')
+            {
+                return;
+            }
+            const newCandidateNo = currentStatus= 'available' ?
+             candidateNumbers.concat(number):
+             candidateNumbers.filter(cn=> cn !== number)
+
+            if(utils.sum(newCandidateNo) !== stars){
+                setCandidateNos (newCandidateNo);
+            }   
+            else{
+                const newAvailablenos = availableNumbers.filter(
+                    n=>!newCandidateNo.includes(n));
+                setStars(utils.randomSumIn(newAvailablenos,8))
+                setAvailableNos(newAvailablenos);
+                setCandidateNos([]);
+
+            }
+    }
     return(
         <div className="game">
             <div>
@@ -12,15 +51,15 @@ const StarMatchComponent =()=>{
             </div>
             <div className="body">
                 <div className="left">
-                    {/* {utils.range(1,stars).map(starId =>
-                        <div key= {starId} className="star"/>
-                        )} */}
                         <StarDisplayComponent  count={stars}/>
                 </div>
                 <div className="right">
                     {utils.range(1,8).map(number =>
                         // <button key={number} className="number">{number}</button>
-                        <PlayNumberComponent  num ={number}/>
+                        <PlayNumberComponent  num ={number}
+                        status = {noStatus(number)}
+                        onClick ={onNumberClick}
+                        />
                     )}
                 </div>
             </div>
@@ -28,10 +67,10 @@ const StarMatchComponent =()=>{
         </div>
             );
             };
-const colors = {
+export const colors = {
     available : 'lightgray',
-    used :'loghtgreen',
-    wrong:'loghtcoral',
+    used :'lightgreen',
+    wrong:'lightcoral',
     candidate:'deepskyblue'
 };
 export const utils = {
